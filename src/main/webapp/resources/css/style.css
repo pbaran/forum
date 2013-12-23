@@ -1,0 +1,7 @@
+/**
+Override Cascading Style Sheet for Bootstrap
+*/
+#sign-up-form .alert {
+    margin-top: 12px;
+    margin-bottom: 0px;
+}
