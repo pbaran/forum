@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+*~
+# Ignore build folder#
+build/
