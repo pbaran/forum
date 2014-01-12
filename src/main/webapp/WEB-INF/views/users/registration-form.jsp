@@ -9,55 +9,70 @@
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
         <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
     </head>
-    <body>
-        <h1>Sign up</h1>
-        <form:form action="." modelAttribute="account" cssClass="form-horizontal" id="sign-up-form">
-            <div class="form-group">
-                <label for="inputLogin" class="col-sm-2 control-label">Login</label>
-                <div class="col-sm-3">
-                    <form:input path="login" type="text" cssClass="form-control" id="inputLogin" placeholder="Login" />
-                    <form:errors path="login">
-                        <div class="alert alert-danger"><form:errors path="login" htmlEscape="false" /></div>
-                    </form:errors>
+    <body>        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h1><a href="../">Forum</a></h1>
+                    <p class="lead">discussion on any topic</p>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-3">
-                    <form:input path="password" type="password" cssClass="form-control" id="inputPassword" placeholder="Password" />
-                    <form:errors path="password">
-                        <div class="alert alert-danger"><form:errors path="password" htmlEscape="false" /></div>
-                    </form:errors>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-                <div class="col-sm-3">
-                    <form:input path="email" type="email" cssClass="form-control" id="inputEmail" placeholder="Email" />
-                    <form:errors path="email">
-                        <div class="alert alert-danger"><form:errors path="email" htmlEscape="false" /></div>
-                    </form:errors>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-2">
-                    <div class="checkbox">
-                        <label>
-                            <form:checkbox id="acceptTerms" path="acceptTerms" /> I accept the terms of use
-                        </label>
-                        <form:errors path="acceptTerms">
-                            <div class="alert alert-danger"><form:errors path="acceptTerms" htmlEscape="false" /></div>
-                        </form:errors>
+                <div class="col-lg-4 panel-body">
+                    <div class="btn-group">
+                        <a href="/" class="btn btn-default">Log in</a>
+                        <a href="/" class="btn btn-default">About project</a>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Sign up</button>
+        </div>
+        <hr>
+        <div class="container">
+            <h2>Sign up</h2>
+            <form:form action="." modelAttribute="account" cssClass="form-horizontal" id="sign-up-form">
+                <div class="form-group">
+                    <label for="inputLogin" class="col-sm-2 control-label">Login</label>
+                    <div class="col-sm-3">
+                        <form:input path="login" type="text" cssClass="form-control" id="inputLogin" placeholder="Login" />
+                        <form:errors path="login">
+                            <div class="alert alert-danger"><form:errors path="login" htmlEscape="false" /></div>
+                        </form:errors>
+                    </div>
                 </div>
-            </div>
-        </form>
-        </form:form>
-
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-3">
+                        <form:input path="password" type="password" cssClass="form-control" id="inputPassword" placeholder="Password" />
+                        <form:errors path="password">
+                            <div class="alert alert-danger"><form:errors path="password" htmlEscape="false" /></div>
+                        </form:errors>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-3">
+                        <form:input path="email" type="email" cssClass="form-control" id="inputEmail" placeholder="Email" />
+                        <form:errors path="email">
+                            <div class="alert alert-danger"><form:errors path="email" htmlEscape="false" /></div>
+                        </form:errors>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                        <div class="checkbox">
+                            <label>
+                                <form:checkbox id="acceptTerms" path="acceptTerms" /> I accept the terms of use
+                            </label>
+                            <form:errors path="acceptTerms">
+                                <div class="alert alert-danger"><form:errors path="acceptTerms" htmlEscape="false" /></div>
+                            </form:errors>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Sign up</button>
+                    </div>
+                </div>
+            </form:form>
+        </div>
     </body>
 </html>

@@ -14,13 +14,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h1>Forum dyskusyjne</h1>
-                    <p class="lead">Dyskusja na każdy temat</p>
+                    <h1><a href="./">Forum</a></h1>
+                    <p class="lead">discussion on any topic</p>
                 </div>
                 <div class="col-lg-4 panel-body">
                     <div class="btn-group">
-                        <a href="./users/new" class="btn btn-default">Zarejestruj się</a>
-                        <a href="/" class="btn btn-default">Zaloguj się</a>
+                        <a href="./users/new" class="btn btn-default">Sign up</a>
+                        <a href="/" class="btn btn-default">Log in</a>
+                        <a href="/" class="btn btn-default">About project</a>
                       </div>
                 </div>
             </div>
@@ -33,8 +34,8 @@
                             <h3 class="panel-title">${c.name}</h3>
                         </div>
                         <div class="panel-footer">
-                            <p>Liczba postów: ${c.posts}</p>
-                            <p>Liczba tematów: ${c.topics}</p>
+                            <p>Threads: ${c.topics}</p>
+                            <p>Posts: ${c.posts}</p>
                         </div>
                     </div>
             </c:forEach>
