@@ -29,7 +29,6 @@ import com.projects.discussion.entity.User;
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface UserDAO {
+public interface UserDAO extends Dao<User>{
 
-    void create(User user, String password);
 }

@@ -24,28 +24,14 @@
 
 package com.projects.discussion.dao;
 
+import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Category;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 @Repository
-public class CategoryDAOImpl implements CategoryDAO {
-
-    @Autowired 
-    private SessionFactory sessionFactory;
-
-    @SuppressWarnings("unchecked")
-    public List<Category> getCategories() {
-        Session session = sessionFactory.getCurrentSession();
-        List categories = session.createQuery("from Category").list();
-        
-        return categories;
-    }
+public class CategoryDAOImpl extends AbstractHbnDao<Category> implements CategoryDAO {
 
 }

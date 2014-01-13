@@ -26,6 +26,8 @@ package com.projects.discussion.service;
 
 import com.projects.discussion.dao.UserDAO;
 import com.projects.discussion.entity.User;
+import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,18 +40,29 @@ import org.springframework.validation.Errors;
 @Service("accountService")
 @Transactional(readOnly = true)
 public class AccountServiceImpl implements AccountService {
+    private static final int INACTIVE_USER = 0;
+    private static final int ACTIVE_USER = 1;
     
     @Autowired
     private UserDAO userDao;
     
     @Transactional(readOnly = false)
     public boolean registerAccount(User user, String password, Errors errors) {
+        String salt = "tyD";
         
-        System.out.println("test");
-        //validate data
-        userDao.create(user, password);
+        user.setPassword(salt + password);//generate sha2 hash
+        user.setJoined(new Date());
+        user.setActive(INACTIVE_USER);
+        
+        //@TODO validate data
+
+        userDao.create(user);
         
         return true;
+    }
+
+    public List<User> getUsers() {
+        return userDao.getAll();
     }
     
 }

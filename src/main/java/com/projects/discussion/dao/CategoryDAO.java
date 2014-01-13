@@ -25,12 +25,10 @@
 package com.projects.discussion.dao;
 
 import com.projects.discussion.entity.Category;
-import java.util.List;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface CategoryDAO {
-
-    public List<Category> getCategories();
+public interface CategoryDAO extends Dao<Category> {
+    
 }

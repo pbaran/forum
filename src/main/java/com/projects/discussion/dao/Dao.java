@@ -32,13 +32,12 @@ import java.util.List;
  */
 public interface Dao<T extends Object> {
     
-//    void create();
-//    List<T> getAll();
-//    void update(T t);
-//    void delete(T t);
-//    void deleteById(Serializable id);
-//    void deleteAll();
-//    long count();
-//    boolean exists(Serializable id);
-    
+    void create(T t);
+    List<T> getAll();
+    void update(T t);
+    void delete(T t);
+    void deleteById(Serializable id);
+    void deleteAll();
+    long count();
+    boolean exists(Serializable id);
 }

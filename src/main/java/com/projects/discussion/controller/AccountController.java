@@ -74,6 +74,13 @@ public class AccountController {
         return REGISTRATION_FORM;
     }
     
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String showListUsers(Model model) {
+        model.addAttribute("userList", accountService.getUsers());
+        
+        return "users/list";
+    }
+    
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String postRegistrionForm(
             @ModelAttribute("account") 
@@ -88,7 +95,6 @@ public class AccountController {
             return REGISTRATION_FORM;
         } else {
             log.info("creating new user");
-            //sql
             User user = toAccount(form);
             accountService.registerAccount(user, user.getPassword(), result);
             

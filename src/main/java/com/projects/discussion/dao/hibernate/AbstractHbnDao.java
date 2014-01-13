@@ -33,13 +33,15 @@ import java.util.List;
 import javax.inject.Inject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ReflectionUtils;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public abstract class AbstractHbnDao<T extends Object> implements Dao<T>{
-    @Inject
+public abstract class AbstractHbnDao<T extends Object> implements Dao<T> {
+    //@Inject
+    @Autowired
     private SessionFactory sessionFactory;
     private Class<T> domainClass;
     
@@ -64,14 +66,15 @@ public abstract class AbstractHbnDao<T extends Object> implements Dao<T>{
         Method method = ReflectionUtils.findMethod(
             getDomainClass(), "setDateCreated",
             new Class[] {Date.class});
+
         if (method != null) {
             try {
                 method.invoke(t, new Date());
             } catch (Exception e) {
                 /* ignore */
             }
-            getSession().save(t);
         }
+        getSession().save(t);
     }
     
     @SuppressWarnings("unchecked")
@@ -95,5 +98,23 @@ public abstract class AbstractHbnDao<T extends Object> implements Dao<T>{
     
     public void delete(T t) {
         getSession().delete(t);
+    }
+    
+    public void deleteById(Serializable id) {
+        delete(load(id));
+    }
+    
+    public void deleteAll() {
+        getSession().createQuery("delete " + getDomainClassName()).executeUpdate();
+    }
+    
+    public long count() {
+        return (Long) getSession()
+            .createQuery("select count(*) from " + getDomainClassName())
+            .uniqueResult();
+    }
+    
+    public boolean exists(Serializable id) {
+        return (get(id) != null);
     }
 }

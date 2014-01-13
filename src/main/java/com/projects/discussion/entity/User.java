@@ -24,6 +24,9 @@
 
 package com.projects.discussion.entity;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -40,10 +43,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-enum Type {
-    USER, ADMIN
-}
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
@@ -78,9 +77,8 @@ public class User {
     @Column(name="active", nullable = false)
     private int active;
     
-    @Enumerated(EnumType.STRING)
-    @Column(name="type")
-    private Type type;
+    @Column(name="type", nullable = false)
+    private int type;
     
     @Column(name="joined", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -107,7 +105,16 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        String hash = null;
+        try {
+            MessageDigest sha2 = MessageDigest.getInstance("SHA-256");
+            sha2.update(password.getBytes());
+            BigInteger code = new BigInteger(1, sha2.digest());
+            hash = code.toString(16);
+        } catch (NoSuchAlgorithmException nsax) {
+            // ignore
+        }
+        this.password = hash;
     }
 
     public String getEmail() {
@@ -126,11 +133,11 @@ public class User {
         this.active = active;
     }
 
-    public Type getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(int type) {
         this.type = type;
     }
 

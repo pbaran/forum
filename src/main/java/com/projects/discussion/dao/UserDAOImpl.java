@@ -24,6 +24,7 @@
 
 package com.projects.discussion.dao;
 
+import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -31,11 +32,6 @@ import org.springframework.stereotype.Repository;
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class UserDAOImpl extends AbstractHbnDao<User> implements UserDAO {
     
-    public void create(User user, String password) {
-
-        System.out.println(user);
-    }
-
 }

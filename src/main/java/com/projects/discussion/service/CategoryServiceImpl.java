@@ -45,8 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryDAO = categoryDAO;
     }
 
-//    @Override
     public List<Category> getCategories() {
-        return categoryDAO.getCategories();
+        return categoryDAO.getAll();
     }    
 }
