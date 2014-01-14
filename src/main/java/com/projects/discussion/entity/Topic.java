@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2013 Piotr Baran <admin@piotrus.net.pl>.
+ * Copyright 2014 Piotr Baran <admin@piotrus.net.pl>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,41 +37,41 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 @Entity
-@Table(name="category")
-public class Category {
-
+@Table(name="topic")
+public class Topic {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", nullable = false)
+    @Column(name="id", nullable = false, unique = true)
     private Long id;
     
-    @Column(name="name", nullable = false)
-    private String name;
-    
-    @Column(name="name_seo", nullable = false)
-    private String nameSeo;
+    @Column(name="title", nullable = false)
+    private String title;
     
     @Column(name="description", nullable = false)
     private String description;
     
-    @Column(name="topics", nullable = false)
-    private int topics;
+    @Column(name="author_id", nullable = false)
+    private Long authorId;
     
-    @Column(name="posts", nullable = false)
-    private int posts;
-
-    @Column(name="last_active_topic_id", nullable = false)
-    private int lastActiveTopic;
-
+    @Column(name="last_Poster_id", nullable = false)
+    private Long lastPosterId;
+    
+    @Column(name="start_date", nullable = false)
+    private int startDate;
+    
+    @Column(name="last_post", nullable = false)
+    private int lastPost;
+    
+    @Column(name="title_seo", nullable = false)
+    private String titleSeo;
+    
     public Long getId() {
         return id;
     }
@@ -80,20 +80,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNameSeo() {
-        return nameSeo;
-    }
-
-    public void setNameSeo(String nameSeo) {
-        this.nameSeo = nameSeo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -104,27 +96,43 @@ public class Category {
         this.description = description;
     }
 
-    public int getTopics() {
-        return topics;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setTopics(int topics) {
-        this.topics = topics;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
-    public int getPosts() {
-        return posts;
+    public Long getLastPosterId() {
+        return lastPosterId;
     }
 
-    public void setPosts(int posts) {
-        this.posts = posts;
+    public void setLastPosterId(Long lastPosterId) {
+        this.lastPosterId = lastPosterId;
     }
 
-    public int getLastActiveTopic() {
-        return lastActiveTopic;
+    public int getStartDate() {
+        return startDate;
     }
 
-    public void setLastActiveTopic(int lastActiveTopic) {
-        this.lastActiveTopic = lastActiveTopic;
+    public void setStartDate(int startDate) {
+        this.startDate = startDate;
+    }
+
+    public int getLastPost() {
+        return lastPost;
+    }
+
+    public void setLastPost(int lastPost) {
+        this.lastPost = lastPost;
+    }
+
+    public String getTitleSeo() {
+        return titleSeo;
+    }
+
+    public void setTitleSeo(String titleSeo) {
+        this.titleSeo = titleSeo;
     }
 }
