@@ -28,10 +28,15 @@
         </div>
         <hr>
         <div class="container">
+            <ol class="breadcrumb">
+                <li><small><a href="#">Home</a></small></li>
+            </ol>
+        </div>
+        <div class="container">
             <c:forEach var="c" items="${categoryList}">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">${c.name}</h3>
+                            <h3 class="panel-title"><a href="./topics">${c.name}</a></h3>
                         </div>
                         <div class="panel-body">
                             <div class="col-lg-8"><small>${c.description}</small></div>

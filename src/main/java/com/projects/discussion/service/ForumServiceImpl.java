@@ -22,16 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.dao;
+package com.projects.discussion.service;
 
-import com.projects.discussion.dao.hibernate.AbstractHbnDao;
+import com.projects.discussion.dao.TopicDAO;
 import com.projects.discussion.entity.Topic;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-@Repository
-public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
+@Service("forumService")
+@Transactional(readOnly = true)
+public class ForumServiceImpl implements ForumService {
+    
+    @Autowired
+    private TopicDAO topicDao;
 
+    public List<Topic> getTopics() {
+        return topicDao.getAll();
+    }
+    
 }

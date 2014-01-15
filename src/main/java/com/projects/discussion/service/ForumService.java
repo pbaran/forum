@@ -22,16 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.dao;
+package com.projects.discussion.service;
 
-import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Topic;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-@Repository
-public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
-
+public interface ForumService {
+    public List<Topic> getTopics();
 }

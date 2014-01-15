@@ -60,7 +60,10 @@ public class Topic {
     @Column(name="author_id", nullable = false)
     private Long authorId;
     
-    @Column(name="last_Poster_id", nullable = false)
+    @Column(name="posts")
+    private Long posts;
+    
+    @Column(name="last_poster_id", nullable = false)
     private Long lastPosterId;
     
     @Column(name="start_date", nullable = false)
@@ -102,6 +105,14 @@ public class Topic {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public Long getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Long posts) {
+        this.posts = posts;
     }
 
     public Long getLastPosterId() {

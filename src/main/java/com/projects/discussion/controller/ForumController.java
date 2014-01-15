@@ -1,7 +1,7 @@
-/*
+    /*
  * The MIT License
  *
- * Copyright 2014 Piotr Baran <admin@piotrus.net.pl>.
+ * Copyright 2013 Piotr Baran <admin@piotrus.net.pl>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,16 +22,33 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.dao;
+package com.projects.discussion.controller;
 
-import com.projects.discussion.dao.hibernate.AbstractHbnDao;
-import com.projects.discussion.entity.Topic;
-import org.springframework.stereotype.Repository;
+import com.projects.discussion.service.ForumService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-@Repository
-public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
-
+@Controller
+public class ForumController {
+    private static final Logger log = LoggerFactory.getLogger(ForumController.class);
+    private static final String TOPICS_VIEW = "forum/list-topics";
+    
+    @Autowired
+    private ForumService forumService;
+    
+    @RequestMapping(value = "topics", method = RequestMethod.GET)
+    public String showListTopics(Model model) {
+        model.addAttribute("topicList", forumService.getTopics());
+        
+        return TOPICS_VIEW;
+    }
 }
