@@ -26,6 +26,7 @@ package com.projects.discussion.dao;
 
 import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Topic;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -34,4 +35,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
 
+    public List<Topic> getTopicsByCategoryId(Long categoryId) {
+        return getSession()
+            .createQuery("from Topic where categoryId = :categoryId")
+            .setParameter("categoryId", categoryId)
+            .list();
+    }
 }

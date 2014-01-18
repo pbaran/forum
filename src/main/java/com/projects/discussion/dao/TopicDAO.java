@@ -25,10 +25,11 @@
 package com.projects.discussion.dao;
 
 import com.projects.discussion.entity.Topic;
+import java.util.List;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 public interface TopicDAO extends Dao<Topic> {
-
+    public List<Topic> getTopicsByCategoryId(Long categoryId);
 }

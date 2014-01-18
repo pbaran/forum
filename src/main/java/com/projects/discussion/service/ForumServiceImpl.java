@@ -41,8 +41,8 @@ public class ForumServiceImpl implements ForumService {
     @Autowired
     private TopicDAO topicDao;
 
-    public List<Topic> getTopics() {
-        return topicDao.getAll();
+    public List<Topic> getTopicsByCategory(Long categoryId) {
+        return topicDao.getTopicsByCategoryId(categoryId);
     }
     
 }

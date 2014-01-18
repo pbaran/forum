@@ -31,5 +31,5 @@ import java.util.List;
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 public interface ForumService {
-    public List<Topic> getTopics();
+    public List<Topic> getTopicsByCategory(Long categoryId);
 }
