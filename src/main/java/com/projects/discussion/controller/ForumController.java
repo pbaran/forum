@@ -24,6 +24,7 @@
 
 package com.projects.discussion.controller;
 
+import com.projects.discussion.entity.Topic;
 import com.projects.discussion.service.ForumService;
 
 import org.slf4j.Logger;

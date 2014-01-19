@@ -38,7 +38,7 @@ public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
 
     public List<Topic> getTopicsByCategoryId(Long categoryId) {
         return getSession()
-            .createQuery("from Topic where categoryId = :categoryId")
+            .createQuery("from Topic t where t.category.id = :categoryId")
             .setParameter("categoryId", categoryId)
             .list();
     }

@@ -27,9 +27,12 @@ package com.projects.discussion.entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,8 +49,12 @@ public class Topic {
     @Column(name="id", nullable = false, unique = true)
     private Long id;
     
-    @Column(name="category_id", nullable = false)
-    private Long categoryId;
+//    @Column(name="category_id", nullable = false)
+//    private Long categoryId;
+    
+    @JoinColumn(name = "category_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Category category;
     
     @Column(name="title", nullable = false)
     private String title;
@@ -82,12 +89,20 @@ public class Topic {
         this.id = id;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+//    public Long getCategoryId() {
+//        return categoryId;
+//    }
+//
+//    public void setCategoryId(Long categoryId) {
+//        this.categoryId = categoryId;
+//    }
+
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getTitle() {

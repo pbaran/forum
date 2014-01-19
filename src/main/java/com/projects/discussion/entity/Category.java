@@ -25,6 +25,7 @@
 package com.projects.discussion.entity;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -71,6 +72,17 @@ public class Category {
 
     @Column(name="last_active_topic_id", nullable = false)
     private int lastActiveTopic;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private List<Topic> topicList;
+
+    public List getTopicList() {
+        return topicList;
+    }
+
+    public void setTopicList(List topicList) {
+        this.topicList = topicList;
+    }
 
     public Long getId() {
         return id;

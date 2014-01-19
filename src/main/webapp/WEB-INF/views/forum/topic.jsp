@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${topic.title}</title>
+        <title>${topic.title} :: ${topic.category.name}</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
     </head>
     <body>
@@ -28,7 +28,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><small><a href="${contextPath}">Home</a></small></li>
-                <li><small><a href="${contextPath}/category/">Name category</a></small></li>
+                <li><small><a href="${contextPath}/category/${topic.category.id}">${topic.category.name} category</a></small></li>
                 <li class="active"><small>${topic.title}</small></li>
             </ol>
         </div>
@@ -45,6 +45,7 @@
                     ${p.content}
                 </div>
             </c:forEach>
+            
         </div>
     </body>
 </html>

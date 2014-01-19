@@ -5,7 +5,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Name Category</title>
+        <title>${topicList.iterator().next().category.name}</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
     </head>
     <body>
@@ -28,7 +28,7 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><small><a href="${contextPath}">Home</a></small></li>
-                <li class="active"><small>Name Category</small></li>
+                <li class="active"><small>${topicList.iterator().next().category.name} category</small></li>
             </ol>
         </div>
         <div class="container">
