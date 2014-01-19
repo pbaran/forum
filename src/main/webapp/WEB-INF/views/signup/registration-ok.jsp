@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,8 +17,8 @@
                 </div>
                 <div class="col-lg-4 panel-body">
                     <div class="btn-group">
-                        <a href="/" class="btn btn-default">Log in</a>
-                        <a href="/" class="btn btn-default">About project</a>
+                        <a href="${contextPath}/login" class="btn btn-default">Log in</a>
+                        <a href="${contextPath}/about-project" class="btn btn-default">About project</a>
                       </div>
                 </div>
             </div>

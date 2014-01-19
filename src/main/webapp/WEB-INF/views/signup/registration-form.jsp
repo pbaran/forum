@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,8 +19,8 @@
                 </div>
                 <div class="col-lg-4 panel-body">
                     <div class="btn-group">
-                        <a href="./login" class="btn btn-default">Log in</a>
-                        <a href="./about-project" class="btn btn-default">About project</a>
+                        <a href="${contextPath}/login" class="btn btn-default">Log in</a>
+                        <a href="${contextPath}/about-project" class="btn btn-default">About project</a>
                     </div>
                 </div>
             </div>
