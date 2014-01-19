@@ -24,8 +24,11 @@
 
 package com.projects.discussion.service;
 
+import com.projects.discussion.dao.PostDAO;
 import com.projects.discussion.dao.TopicDAO;
+import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
+import java.io.Serializable;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,9 +43,23 @@ public class ForumServiceImpl implements ForumService {
     
     @Autowired
     private TopicDAO topicDao;
+    @Autowired
+    private PostDAO postDao;
 
     public List<Topic> getTopicsByCategory(Long categoryId) {
         return topicDao.getTopicsByCategoryId(categoryId);
+    }
+
+    public List<Post> getPostsByTopicId(Long topicId) {
+        return postDao.getPostsByTopicId(topicId);
+    }
+
+    public Long getTopicIdByTitleSeo(String titleSeo) {
+        return topicDao.getTopicIdByTitleSeo(titleSeo);
+    }
+
+    public Topic getTopic(Long topicId) {
+        return topicDao.getTopic(topicId);
     }
     
 }

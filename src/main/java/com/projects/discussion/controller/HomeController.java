@@ -1,6 +1,7 @@
 package com.projects.discussion.controller;
 
 import com.projects.discussion.service.CategoryService;
+import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,7 @@ public class HomeController {
 
     @Autowired
     private CategoryService categoryService;
-    
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showListCategories(Model model) {
         model.addAttribute("categoryList", categoryService.getCategories());
@@ -24,7 +25,4 @@ public class HomeController {
         return "index";
     }
 
-//    public void setCategoryService(CategoryService categoryService) {
-//        this.categoryService = categoryService;
-//    }
 }

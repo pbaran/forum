@@ -27,6 +27,7 @@ package com.projects.discussion.dao;
 import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Topic;
 import java.util.List;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -40,5 +41,17 @@ public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
             .createQuery("from Topic where categoryId = :categoryId")
             .setParameter("categoryId", categoryId)
             .list();
+    }
+    public Long getTopicIdByTitleSeo(String titleSeo) {
+        return ((Long) getSession()
+            .createQuery("select t.id from Topic t where titleSeo = :titleSeo")
+            .setParameter("titleSeo", titleSeo).iterate().next() ).longValue();
+    }
+
+    public Topic getTopic(Long topicId) {
+        return (Topic) getSession()
+            .createQuery("from Topic where id = :id")
+            .setParameter("id", topicId)
+            .uniqueResult();
     }
 }

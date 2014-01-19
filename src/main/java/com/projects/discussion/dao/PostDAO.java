@@ -24,14 +24,13 @@
 
 package com.projects.discussion.dao;
 
+import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
 import java.util.List;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface TopicDAO extends Dao<Topic> {
-    public List<Topic> getTopicsByCategoryId(Long categoryId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public Topic getTopic(Long topicId);
+public interface PostDAO extends Dao<Post> {
+    public List<Post> getPostsByTopicId(Long topicId);
 }

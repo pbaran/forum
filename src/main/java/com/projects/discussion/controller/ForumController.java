@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ForumController {
     private static final Logger log = LoggerFactory.getLogger(ForumController.class);
     private static final String TOPICS_VIEW = "forum/list-topics";
+    private static final String TOPIC_VIEW = "forum/topic";
     
     @Autowired
     private ForumService forumService;
@@ -51,5 +52,15 @@ public class ForumController {
         model.addAttribute("topicList", forumService.getTopicsByCategory(categoryId));
         
         return TOPICS_VIEW;
+    }
+    
+    @RequestMapping(value = "/topic/{name}", method = RequestMethod.GET)
+    public String getTopic(@PathVariable String name, Model model) {
+        Long topicId = forumService.getTopicIdByTitleSeo(name);
+
+        model.addAttribute("topic", forumService.getTopic(topicId));
+        model.addAttribute("postsList", forumService.getPostsByTopicId(topicId));
+        
+        return TOPIC_VIEW;
     }
 }

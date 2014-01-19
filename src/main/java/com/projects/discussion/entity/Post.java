@@ -38,72 +38,36 @@ import javax.persistence.TemporalType;
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 @Entity
-@Table(name="topic")
-public class Topic {
+@Table(name="post")
+public class Post {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", nullable = false, unique = true)
     private Long id;
     
-    @Column(name="category_id", nullable = false)
-    private Long categoryId;
-    
-    @Column(name="title", nullable = false)
-    private String title;
-    
-    @Column(name="description", nullable = false)
-    private String description;
-    
     @Column(name="author_id", nullable = false)
     private Long authorId;
+        
+    @Column(name="author_name", nullable = false)
+    private String authorName;
     
-    @Column(name="posts")
-    private Long posts;
-    
-    @Column(name="last_poster_id", nullable = false)
-    private Long lastPosterId;
-    
-    @Column(name="start_date", insertable = false, updatable = false)
+    @Column(name="post_date", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startDate;
+    private Date postDate;
+        
+    @Column(name="content", nullable = false)
+    private String content;
     
-    @Column(name="last_post", nullable = false)
-    private int lastPost;
-    
-    @Column(name="title_seo", nullable = false)
-    private String titleSeo;
-    
+    @Column(name="topic_id", nullable = false)
+    private Long topicId;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Long getAuthorId() {
@@ -114,43 +78,36 @@ public class Topic {
         this.authorId = authorId;
     }
 
-    public Long getPosts() {
-        return posts;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setPosts(Long posts) {
-        this.posts = posts;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
-    public Long getLastPosterId() {
-        return lastPosterId;
+    public Date getPostDate() {
+        return postDate;
     }
 
-    public void setLastPosterId(Long lastPosterId) {
-        this.lastPosterId = lastPosterId;
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getContent() {
+        return content;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public int getLastPost() {
-        return lastPost;
+    public Long getTopicId() {
+        return topicId;
     }
 
-    public void setLastPost(int lastPost) {
-        this.lastPost = lastPost;
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
     }
-
-    public String getTitleSeo() {
-        return titleSeo;
-    }
-
-    public void setTitleSeo(String titleSeo) {
-        this.titleSeo = titleSeo;
-    }
+    
 }

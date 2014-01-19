@@ -26,9 +26,9 @@ package com.projects.discussion.controller;
 
 import com.projects.discussion.entity.User;
 import com.projects.discussion.form.AccountForm;
+import com.projects.discussion.form.LoginForm;
 import com.projects.discussion.service.AccountService;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,11 +47,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 @Controller
-@RequestMapping("/users")
 public class AccountController {
     private static final Logger log = LoggerFactory.getLogger(AccountController.class);
-    private static final String REGISTRATION_FORM = "users/registration-form";
-    private static final String REGISTRATION_OK = "redirect:registration-ok";
+    private static final String REGISTRATION_FORM = "signup/registration-form";
+    private static final String REGISTRATION_OK = "redirect:signup-completed";
+    private static final String LOGIN_FORM = "login/login-form";
     
     @Autowired
     private AccountService accountService;
@@ -66,7 +66,7 @@ public class AccountController {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
     
-    @RequestMapping(value = "new", method = RequestMethod.GET)
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String getRegistrationForm(Model model) {
         model.addAttribute("account", new AccountForm());
         log.info("Registration form was displayed");
@@ -74,14 +74,7 @@ public class AccountController {
         return REGISTRATION_FORM;
     }
     
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public String showListUsers(Model model) {
-        model.addAttribute("userList", accountService.getUsers());
-        
-        return "users/list";
-    }
-    
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String postRegistrionForm(
             @ModelAttribute("account") 
             @Valid AccountForm form,
@@ -101,6 +94,15 @@ public class AccountController {
             return REGISTRATION_OK;
         }
     }
+    
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getLoginForm(Model model) {
+        model.addAttribute("login", new LoginForm());
+        log.info("Login form was displayed");
+        
+        return LOGIN_FORM;
+    }
+
     private static User toAccount(AccountForm form) {
         User user = new User();
         user.setLogin(form.getLogin());
@@ -111,11 +113,5 @@ public class AccountController {
         return user;
     }
 
-//    public void setAccountService(AccountService accountService) {
-//        this.accountService = accountService;
-//    }
-    
-//    private static void convertPasswordError(BindingResult result) {
-//        
-//    }
+
 }

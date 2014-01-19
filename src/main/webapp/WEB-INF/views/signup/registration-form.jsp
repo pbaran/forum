@@ -18,8 +18,8 @@
                 </div>
                 <div class="col-lg-4 panel-body">
                     <div class="btn-group">
-                        <a href="/" class="btn btn-default">Log in</a>
-                        <a href="/" class="btn btn-default">About project</a>
+                        <a href="./login" class="btn btn-default">Log in</a>
+                        <a href="./about-project" class="btn btn-default">About project</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
         <hr>
         <div class="container">
             <h2>Sign up</h2>
-            <form:form action="." modelAttribute="account" cssClass="form-horizontal" id="sign-up-form">
+            <form:form action="signup" modelAttribute="account" cssClass="form-horizontal" id="sign-up-form">
                 <div class="form-group">
                     <label for="inputLogin" class="col-sm-2 control-label">Login</label>
                     <div class="col-sm-3">

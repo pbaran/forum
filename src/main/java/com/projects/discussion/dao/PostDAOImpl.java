@@ -24,14 +24,21 @@
 
 package com.projects.discussion.dao;
 
-import com.projects.discussion.entity.Topic;
+import com.projects.discussion.dao.hibernate.AbstractHbnDao;
+import com.projects.discussion.entity.Post;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface TopicDAO extends Dao<Topic> {
-    public List<Topic> getTopicsByCategoryId(Long categoryId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public Topic getTopic(Long topicId);
+@Repository
+public class PostDAOImpl extends AbstractHbnDao<Post> implements PostDAO {
+
+    public List<Post> getPostsByTopicId(Long topicId) {
+        return getSession()
+            .createQuery("from Post where topicId = :topicId")
+            .setParameter("topicId", topicId)
+            .list();
+    }
 }

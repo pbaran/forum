@@ -19,9 +19,9 @@
                 </div>
                 <div class="col-lg-4 panel-body">
                     <div class="btn-group">
-                        <a href="./users/new" class="btn btn-default">Sign up</a>
-                        <a href="/" class="btn btn-default">Log in</a>
-                        <a href="/" class="btn btn-default">About project</a>
+                        <a href="./signup" class="btn btn-default">Sign up</a>
+                        <a href="./login" class="btn btn-default">Log in</a>
+                        <a href="./about-project" class="btn btn-default">About project</a>
                       </div>
                 </div>
             </div>

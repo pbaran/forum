@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Name Category</title>
+        <title>${topic.title}</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
     </head>
     <body>
@@ -19,7 +19,7 @@
                         <a href="../signup" class="btn btn-default">Sign up</a>
                         <a href="../login" class="btn btn-default">Log in</a>
                         <a href="../about-project" class="btn btn-default">About project</a>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,30 +27,23 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><small><a href="../">Home</a></small></li>
-                <li class="active"><small>Name Category</small></li>
+                <li><small><a href="../">Name category</a></small></li>
+                <li class="active"><small>${topic.title}</small></li>
             </ol>
         </div>
         <div class="container">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Started by</th>
-                        <th>Replies</th>
-                        <th>Last post by</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="t" items="${topicList}">
-                        <tr>
-                            <td><p>${t.title}</p></td>
-                            <td><p> username(${t.authorId})</p></td>
-                            <td><p>${t.posts}</p></td>
-                            <td><p>>> date, username(${t.lastPosterId})</p></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+            <h2>Thread: <span>${topic.title}</span></h2>
+            <p class="text-right text-info"><small>${topic.authorId}(name), ${topic.startDate}</small></p>
+            <div class="well well-sm">
+                ${topic.description}
+            </div>
+
+            <c:forEach var="p" items="${postsList}">
+                <p class="text-right text-info"><small>${p.authorId}(name), ${p.postDate}</small></p>
+                <div class="well well-sm">
+                    ${p.content}
+                </div>
+            </c:forEach>
         </div>
     </body>
 </html>
