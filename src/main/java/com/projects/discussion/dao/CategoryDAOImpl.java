@@ -26,6 +26,7 @@ package com.projects.discussion.dao;
 
 import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Category;
+import java.io.Serializable;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -33,5 +34,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class CategoryDAOImpl extends AbstractHbnDao<Category> implements CategoryDAO {
+
+    public Category get(Long id) {
+        return get((Serializable)id);
+    }
 
 }

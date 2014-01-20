@@ -24,6 +24,7 @@
 
 package com.projects.discussion.service;
 
+import com.projects.discussion.entity.Category;
 import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
 import java.util.List;
@@ -36,4 +37,5 @@ public interface ForumService {
     public Topic getTopic(Long topicId);
     public Long getTopicIdByTitleSeo(String titleSeo);
     public List<Post> getPostsByTopicId(Long topicId);
+    public Category getCategoryById(Long categoryId);
 }

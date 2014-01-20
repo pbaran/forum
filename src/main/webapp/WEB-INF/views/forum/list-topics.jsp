@@ -22,7 +22,7 @@
                         <a href="${contextPath}/signup" class="btn btn-default">Sign up</a>
                         <a href="${contextPath}/login" class="btn btn-default">Log in</a>
                         <a href="${contextPath}/about-project" class="btn btn-default">About project</a>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>

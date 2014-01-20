@@ -26,6 +26,7 @@ package com.projects.discussion.controller;
 
 import com.projects.discussion.entity.Topic;
 import com.projects.discussion.service.ForumService;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ForumController {
     private static final Logger log = LoggerFactory.getLogger(ForumController.class);
+    private static final String CATEGORY_WITHOUT_TOPICS_VIEW = "forum/category-without-topics";
     private static final String TOPICS_VIEW = "forum/list-topics";
     private static final String TOPIC_VIEW = "forum/topic";
     
@@ -50,9 +52,17 @@ public class ForumController {
     
     @RequestMapping(value = "category/{categoryId}", method = RequestMethod.GET)
     public String showListTopics(@PathVariable Long categoryId, Model model) {
-        model.addAttribute("topicList", forumService.getTopicsByCategory(categoryId));
+        List<Topic> topicList = forumService.getTopicsByCategory(categoryId);
         
-        return TOPICS_VIEW;
+        if (topicList.isEmpty()) {
+            model.addAttribute("category", forumService.getCategoryById(categoryId));
+            
+            return CATEGORY_WITHOUT_TOPICS_VIEW;
+        } else {
+            model.addAttribute("topicList", topicList);
+        
+            return TOPICS_VIEW;
+        }
     }
     
     @RequestMapping(value = "/topic/{name}", method = RequestMethod.GET)

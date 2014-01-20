@@ -30,5 +30,5 @@ import com.projects.discussion.entity.Category;
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 public interface CategoryDAO extends Dao<Category> {
-    
+    public Category get(Long id);
 }

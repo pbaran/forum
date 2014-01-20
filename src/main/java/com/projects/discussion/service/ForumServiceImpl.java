@@ -24,8 +24,10 @@
 
 package com.projects.discussion.service;
 
+import com.projects.discussion.dao.CategoryDAO;
 import com.projects.discussion.dao.PostDAO;
 import com.projects.discussion.dao.TopicDAO;
+import com.projects.discussion.entity.Category;
 import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
 import java.io.Serializable;
@@ -45,6 +47,8 @@ public class ForumServiceImpl implements ForumService {
     private TopicDAO topicDao;
     @Autowired
     private PostDAO postDao;
+    @Autowired
+    private CategoryDAO categoryDao;
 
     public List<Topic> getTopicsByCategory(Long categoryId) {
         return topicDao.getTopicsByCategoryId(categoryId);
@@ -60,6 +64,10 @@ public class ForumServiceImpl implements ForumService {
 
     public Topic getTopic(Long topicId) {
         return topicDao.getTopic(topicId);
+    }
+
+    public Category getCategoryById(Long categoryId) {
+        return categoryDao.get(categoryId);
     }
     
 }
