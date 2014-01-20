@@ -24,15 +24,13 @@
 
 package com.projects.discussion.form;
 
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public class AccountForm {
+public class LoginForm {
     @NotNull
     @Size(min = 3, max = 100)
     private String login;
@@ -40,14 +38,6 @@ public class AccountForm {
     @NotNull
     @Size(min = 3, max = 100)
     private String password;
-    
-    @NotNull
-    @Size(min = 6, max = 512)
-    @Email
-    private String email;
-    
-    @AssertTrue
-    private boolean acceptTerms = false;
 
     public String getLogin() {
         return login;
@@ -63,26 +53,5 @@ public class AccountForm {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isAcceptTerms() {
-        return acceptTerms;
-    }
-
-    public void setAcceptTerms(boolean acceptTerms) {
-        this.acceptTerms = acceptTerms;
-    }
-
-    @Override
-    public String toString() {
-        return "login: " + login + "; email: " + email + "; acceptTerms: " + acceptTerms; //To change body of generated methods, choose Tools | Templates.
     }
 }
