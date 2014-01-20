@@ -26,6 +26,7 @@ package com.projects.discussion.form;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
@@ -35,6 +36,7 @@ import org.hibernate.validator.constraints.Email;
 public class AccountForm {
     @NotNull
     @Size(min = 3, max = 100)
+    @Pattern(regexp="^[a-zA-Z0-9]+$", message="Only digits and letter.")
     private String login;
     
     @NotNull
