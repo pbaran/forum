@@ -47,7 +47,7 @@
                             <td><p><a href="${contextPath}/topic/${t.titleSeo}">${t.title}</a></p></td>
                             <td><p> username(${t.authorId})</p></td>
                             <td><p>${t.posts}</p></td>
-                            <td><p>>> date, username(${t.lastPosterId})</p></td>
+                            <td><p>>> ${t.lastPost}, username(${t.lastPosterId})</p></td>
                         </tr>
                     </c:forEach>
                 </tbody>

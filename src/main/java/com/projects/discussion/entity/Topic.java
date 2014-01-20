@@ -48,10 +48,7 @@ public class Topic {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", nullable = false, unique = true)
     private Long id;
-    
-//    @Column(name="category_id", nullable = false)
-//    private Long categoryId;
-    
+
     @JoinColumn(name = "category_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
@@ -76,7 +73,8 @@ public class Topic {
     private Date startDate;
     
     @Column(name="last_post", nullable = false)
-    private int lastPost;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastPost;
     
     @Column(name="title_seo", nullable = false)
     private String titleSeo;
@@ -88,14 +86,6 @@ public class Topic {
     public void setId(Long id) {
         this.id = id;
     }
-
-//    public Long getCategoryId() {
-//        return categoryId;
-//    }
-//
-//    public void setCategoryId(Long categoryId) {
-//        this.categoryId = categoryId;
-//    }
 
     public Category getCategory() {
         return category;
@@ -153,11 +143,11 @@ public class Topic {
         this.startDate = startDate;
     }
 
-    public int getLastPost() {
+    public Date getLastPost() {
         return lastPost;
     }
 
-    public void setLastPost(int lastPost) {
+    public void setLastPost(Date lastPost) {
         this.lastPost = lastPost;
     }
 
