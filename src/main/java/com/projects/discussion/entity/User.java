@@ -29,15 +29,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -84,6 +87,9 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date joined;
     
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
+//    private List<Topic> userList;
+
     public Long getId() {
         return id;
     }

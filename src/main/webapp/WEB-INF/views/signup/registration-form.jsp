@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h1><a href="../">Forum</a></h1>
+                    <h1><a href="${contextPath}">Forum</a></h1>
                     <p class="lead">discussion on any topic</p>
                 </div>
                 <div class="col-lg-4 panel-body">

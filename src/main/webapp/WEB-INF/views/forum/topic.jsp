@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${topic.title} :: ${topic.category.name}</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
     </head>
     <body>
         <div class="container">
@@ -34,13 +36,13 @@
         </div>
         <div class="container">
             <h2>Thread: <span>${topic.title}</span></h2>
-            <p class="text-right text-info"><small>${topic.authorId}(name), ${topic.startDate}</small></p>
+            <p class="text-right text-info"><small><a href="${contextPath}/user/profile/${topic.author.login}">${topic.author.login}</a>, <fmt:formatDate value="${topic.startDate}" pattern="dd/MM/yyyy HH:mm"/></small></p>
             <div class="well well-sm">
                 ${topic.description}
             </div>
 
             <c:forEach var="p" items="${postsList}">
-                <p class="text-right text-info"><small>${p.authorId}(name), ${p.postDate}</small></p>
+                <p class="text-right text-info"><small>${p.authorId}(name), <fmt:formatDate value="${p.postDate}" pattern="dd/MM/yyyy HH:mm"/></small></p>
                 <div class="well well-sm">
                     ${p.content}
                 </div>

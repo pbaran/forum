@@ -59,8 +59,9 @@ public class Topic {
     @Column(name="description", nullable = false)
     private String description;
     
-    @Column(name="author_id", nullable = false)
-    private Long authorId;
+    @JoinColumn(name="author_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
     
     @Column(name="posts")
     private Long posts;
@@ -111,12 +112,12 @@ public class Topic {
         this.description = description;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public Long getPosts() {

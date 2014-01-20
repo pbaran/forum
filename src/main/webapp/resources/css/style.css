@@ -5,3 +5,6 @@ Override Cascading Style Sheet for Bootstrap
     margin-top: 12px;
     margin-bottom: 0px;
 }
+p {
+    margin-bottom: 0px;
+}
