@@ -34,5 +34,11 @@
         <div class="container">
             <h1>Thank you for registering.</h1>
         </div>
+        <hr>
+        <footer>
+            <div class="container">
+                <p class="text-right"><small>©2014 <a href="https://github.com/piecia">Piotr Baran</a> - <a href="https://github.com/piecia/forum">Code</a></small></p>
+            </div>
+        </footer>
     </body>
 </html>

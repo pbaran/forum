@@ -31,7 +31,7 @@
         <hr>
         <div class="container">
             <ol class="breadcrumb">
-                <li><small><a href="#">Home</a></small></li>
+                <li><small><a href="${contextPath}">Home</a></small></li>
             </ol>
         </div>
         <div class="container">
@@ -62,5 +62,11 @@
                     </div>
             </c:forEach>
         </div>
+        <hr>
+        <footer>
+            <div class="container">
+                <p class="text-right"><small>©2014 <a href="https://github.com/piecia">Piotr Baran</a> - <a href="https://github.com/piecia/forum">Code</a></small></p>
+            </div>
+        </footer>
     </body>
 </html>
