@@ -66,8 +66,9 @@ public class Topic {
     @Column(name="posts")
     private Long posts;
     
-    @Column(name="last_poster_id", nullable = false)
-    private Long lastPosterId;
+    @JoinColumn(name="last_poster_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User lastPoster;
     
     @Column(name="start_date", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -128,12 +129,12 @@ public class Topic {
         this.posts = posts;
     }
 
-    public Long getLastPosterId() {
-        return lastPosterId;
+    public User getLastPoster() {
+        return lastPoster;
     }
 
-    public void setLastPosterId(Long lastPosterId) {
-        this.lastPosterId = lastPosterId;
+    public void setLastPoster(User lastPoster) {
+        this.lastPoster = lastPoster;
     }
 
     public Date getStartDate() {

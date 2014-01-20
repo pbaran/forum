@@ -59,7 +59,7 @@
                                                 <fmt:formatDate value="${t.startDate}" pattern="dd/MM/yyyy HH:mm"/>, <a href="${contextPath}/user/profile/${t.author.login}">${t.author.login}</a>
                                             </c:when>
                                             <c:otherwise>
-                                                <fmt:formatDate value="${t.lastPost}" pattern="dd/MM/yyyy HH:mm"/>, ${t.lastPosterId}
+                                                <fmt:formatDate value="${t.lastPost}" pattern="dd/MM/yyyy HH:mm"/>, <a href="${contextPath}/user/profile/${t.lastPoster.login}">${t.lastPoster.login}</a>
                                             </c:otherwise>
                                         </c:choose>
                                     </small>

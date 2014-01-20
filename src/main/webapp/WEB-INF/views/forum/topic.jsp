@@ -42,7 +42,7 @@
             </div>
 
             <c:forEach var="p" items="${postsList}">
-                <p class="text-right text-info"><small>${p.authorId}(name), <fmt:formatDate value="${p.postDate}" pattern="dd/MM/yyyy HH:mm"/></small></p>
+                <p class="text-right text-info"><small><a href="${contextPath}/user/profile/${p.author.login}">${p.author.login}</a>, <fmt:formatDate value="${p.postDate}" pattern="dd/MM/yyyy HH:mm"/></small></p>
                 <div class="well well-sm">
                     ${p.content}
                 </div>

@@ -27,9 +27,12 @@ package com.projects.discussion.entity;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,8 +49,9 @@ public class Post {
     @Column(name="id", nullable = false, unique = true)
     private Long id;
     
-    @Column(name="author_id", nullable = false)
-    private Long authorId;
+    @JoinColumn(name="author_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User author;
         
     @Column(name="author_name", nullable = false)
     private String authorName;
@@ -70,12 +74,12 @@ public class Post {
         this.id = id;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
     public String getAuthorName() {
