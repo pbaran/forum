@@ -1,17 +1,18 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${category.name}</title>
+        <title>You have successfully logged out</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
         <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
+        <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
     </head>
-    <body>
+    <body>        
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
@@ -39,15 +40,7 @@
         </div>
         <hr>
         <div class="container">
-            <ol class="breadcrumb">
-                <li><small><a href="${contextPath}">Home</a></small></li>
-                <li class="active"><small>${category.name} category</small></li>
-            </ol>
-        </div>
-        <div class="container">
-            <h2>Forum: <span>${category.name}</span></h2>
-            <p><small>${category.description}</small></p>
-            <h3>form to create a new thread (in producing)</h3>
+            <h2>You have successfully logged out</h2>
         </div>
         <hr>
         <footer>

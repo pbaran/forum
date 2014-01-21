@@ -51,6 +51,7 @@ public class AccountController {
     private static final Logger log = LoggerFactory.getLogger(AccountController.class);
     private static final String REGISTRATION_FORM = "signup/registration-form";
     private static final String REGISTRATION_OK = "redirect:signup-completed";
+    private static final String LOGOUT_OK = "login/logout";
     private static final String LOGIN_FORM = "login/login-form";
     
     @Autowired
@@ -101,6 +102,12 @@ public class AccountController {
         log.info("Login form was displayed");
         
         return LOGIN_FORM;
+    }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutUser() {
+        
+        return LOGOUT_OK;
     }
 
     private static User toAccount(AccountForm form) {

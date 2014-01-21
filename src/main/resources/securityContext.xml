@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <http auto-config="true" use-expressions="true">
+<!--        <intercept-url pattern="/user/messages" access="USER" />-->
+<!--        <intercept-url pattern="/user/settings" access="USER" />-->
+        <form-login login-page="/login" default-target-url="/"
+            authentication-failure-url="/login" />
+        <logout logout-success-url="/logout" />
+    </http>
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service data-source-ref="dataSource"
+ 
+		   users-by-username-query="
+		      select login, password, active 
+		      from user where login=?" 
+ 
+		   authorities-by-username-query="
+		      select u.login, ur.authority from user u, user_roles ur 
+		      where ur.id=u.type and u.login =?  " 
+ 
+		/>
+<!--            <user-service>
+                <user name="user" password="user" authorities="USER" />
+                <user name="admin" password="admin" authorities="ADMIN" />
+            </user-service>-->
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

@@ -8,3 +8,6 @@ Override Cascading Style Sheet for Bootstrap
 p {
     margin-bottom: 0px;
 }
+.panel-right {
+    float: right;
+}
