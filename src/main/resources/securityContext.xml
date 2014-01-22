@@ -14,6 +14,7 @@
         <form-login login-page="/login" default-target-url="/"
             authentication-failure-url="/login" />
         <logout logout-success-url="/logout" />
+        <remember-me key="forumKey" token-validity-seconds="2592000"/> <!-- a month -->
     </http>
     <authentication-manager>
         <authentication-provider>
