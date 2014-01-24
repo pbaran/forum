@@ -59,7 +59,14 @@
                 <tbody>
                     <c:forEach var="t" items="${topicList}">
                         <tr>
-                            <td><p><a href="${contextPath}/topic/${t.titleSeo}">${t.title}</a> <span class="label label-danger">New</span></p></td>
+                            <td>
+                                <p>
+                                    <a href="${contextPath}/topic/${t.titleSeo}">${t.title}</a> 
+                                    <c:if test="${t.lastPost.getTime() > sevenDaysBack}">
+                                        <span class="label label-danger">New</span>
+                                    </c:if>
+                                </p>
+                            </td>
                             <td><p><a href="${contextPath}/user/profile/${t.author.login}">${t.author.login}</a></p></td>
                             <td><p>${t.posts}</p></td>
                             <td>

@@ -26,6 +26,7 @@ package com.projects.discussion.controller;
 
 import com.projects.discussion.entity.Topic;
 import com.projects.discussion.service.ForumService;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -59,8 +60,13 @@ public class ForumController {
             
             return CATEGORY_WITHOUT_TOPICS_VIEW;
         } else {
+            Date currentDate = new Date();
+            long msec = currentDate.getTime(),
+                day = 24 * 60 * 60 * 1000;
+
             model.addAttribute("topicList", topicList);
-        
+            model.addAttribute("sevenDaysBack", msec - 7*day);
+
             return TOPICS_VIEW;
         }
     }
