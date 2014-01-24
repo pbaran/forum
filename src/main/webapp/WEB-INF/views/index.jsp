@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -45,14 +46,14 @@
                 <li><small><a href="${contextPath}">Home</a></small></li>
             </ol>
         </div>
-        <div class="container">
+        <div class="container category-list">
             <c:forEach var="c" items="${categoryList}">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title"><a href="${contextPath}/category/${c.id}">${c.name}</a></h3>
                         </div>
                         <div class="panel-body">
-                            <div class="col-lg-8"><small>${c.description}</small></div>
+                            <div class="col-lg-8"><p>${c.description}</p></div>
                             <div class="col-lg-2">
                                 <p>Threads: ${c.topics}</p>
                                 <p>Posts: ${c.posts}</p>
@@ -60,8 +61,12 @@
                             <div class="col-lg-2">
                                 <p>
                                     <c:choose>
-                                        <c:when test="${c.lastActiveTopic != '-1'}">
-                                            <a href="./" title="last topic in category ${c.name}">${c.lastActiveTopic}</a>
+                                        <c:when test="${not empty c.lastActiveTopic}">
+                                            <p>
+                                                <span class="glyphicon glyphicon-share-alt"></span> <a href="${contextPath}/topic/${c.lastActiveTopic.titleSeo}" title="last topic in category ${c.name}">${c.lastActiveTopic.title}</a>
+                                            </p>
+                                            <p>by <a href="${contextPath}/user/profile/${c.lastActiveTopic.lastPoster.login}">${c.lastActiveTopic.lastPoster.login}</a></p>
+                                            <p><fmt:formatDate value="${c.lastActiveTopic.lastPost}" pattern="dd/MM/yyyy, HH:mm"/></p>
                                         </c:when>
                                         <c:otherwise>
                                             no posts

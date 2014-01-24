@@ -70,8 +70,9 @@ public class Category {
     @Column(name="posts", nullable = false)
     private int posts;
 
-    @Column(name="last_active_topic_id", nullable = false)
-    private int lastActiveTopic;
+    @JoinColumn(name = "last_active_topic_id", nullable = true)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Topic lastActiveTopic;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     private List<Topic> topicList;
@@ -132,11 +133,11 @@ public class Category {
         this.posts = posts;
     }
 
-    public int getLastActiveTopic() {
+    public Topic getLastActiveTopic() {
         return lastActiveTopic;
     }
 
-    public void setLastActiveTopic(int lastActiveTopic) {
+    public void setLastActiveTopic(Topic lastActiveTopic) {
         this.lastActiveTopic = lastActiveTopic;
     }
 }

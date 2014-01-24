@@ -11,3 +11,6 @@ p {
 .panel-right {
     float: right;
 }
+.category-list p {
+    font-size: 10px;
+}
