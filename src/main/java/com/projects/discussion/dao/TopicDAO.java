@@ -25,6 +25,8 @@
 package com.projects.discussion.dao;
 
 import com.projects.discussion.entity.Topic;
+import com.projects.discussion.entity.User;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,4 +36,5 @@ public interface TopicDAO extends Dao<Topic> {
     public List<Topic> getTopicsByCategoryId(Long categoryId);
     public Long getTopicIdByTitleSeo(String titleSeo);
     public Topic getTopic(Long topicId);
+    public void updateLastPostAndLastPoster(Long topicId, Date lastPost, User lastPoster);
 }

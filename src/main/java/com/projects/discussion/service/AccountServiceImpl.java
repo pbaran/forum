@@ -25,7 +25,9 @@
 package com.projects.discussion.service;
 
 import com.projects.discussion.dao.UserDAO;
+import com.projects.discussion.dao.UserRolesDAO;
 import com.projects.discussion.entity.User;
+import com.projects.discussion.entity.UserRoles;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -45,6 +47,8 @@ public class AccountServiceImpl implements AccountService {
     
     @Autowired
     private UserDAO userDao;
+    @Autowired
+    private UserRolesDAO userRolesDao;
     
     @Transactional(readOnly = false)
     public boolean registerAccount(User user, String password, Errors errors) {
@@ -53,6 +57,7 @@ public class AccountServiceImpl implements AccountService {
         user.setPassword(salt + password);//generate sha2 hash
         user.setJoined(new Date());
         user.setActive(INACTIVE_USER);
+        user.setType(getUserRole());
         
         //@TODO validate data
 
@@ -63,6 +68,10 @@ public class AccountServiceImpl implements AccountService {
 
     public List<User> getUsers() {
         return userDao.getAll();
+    }
+
+    public UserRoles getUserRole() {
+        return userRolesDao.getUserRole();
     }
     
 }

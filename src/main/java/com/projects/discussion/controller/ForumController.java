@@ -24,16 +24,24 @@
 
 package com.projects.discussion.controller;
 
+import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
+import com.projects.discussion.form.AccountForm;
+import com.projects.discussion.form.PostForm;
 import com.projects.discussion.service.ForumService;
 import java.util.Date;
 import java.util.List;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,7 +85,40 @@ public class ForumController {
 
         model.addAttribute("topic", forumService.getTopic(topicId));
         model.addAttribute("postsList", forumService.getPostsByTopicId(topicId));
-        
+        model.addAttribute("post", new PostForm());
+   
         return TOPIC_VIEW;
+    }
+    
+    @RequestMapping(value = "/topic/{name}", method = RequestMethod.POST)
+    public String sendPost(
+            @ModelAttribute("post") @Valid PostForm form,
+            @PathVariable("name") String titleSeoThread,
+            BindingResult result,
+            Model model) {
+
+        Long topicId = forumService.getTopicIdByTitleSeo(titleSeoThread);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Post post;
+
+        model.addAttribute("topic", forumService.getTopic(topicId));
+        model.addAttribute("postsList", forumService.getPostsByTopicId(topicId));
+        model.addAttribute("post", new PostForm());
+
+        if (result.hasErrors()) {
+            return TOPIC_VIEW;
+        }
+
+
+        // create new post for thread
+        post = forumService.createPost(titleSeoThread, auth.getName(), form.getContent());
+
+        //update lastPost and lastPoster field in topic entity
+        forumService.updateTopic(topicId, new Date(), post.getAuthor());
+        
+        //update lastActiveTopic field in category entity
+        
+        
+        return "redirect:/topic/" + titleSeoThread + "#post-" + post.getId();
     }
 }

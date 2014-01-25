@@ -25,10 +25,12 @@
 package com.projects.discussion.dao;
 
 import com.projects.discussion.entity.User;
+import com.projects.discussion.entity.UserRoles;
+import java.util.Date;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 public interface UserDAO extends Dao<User>{
-
+    public User getUserByUsername(String username);
 }

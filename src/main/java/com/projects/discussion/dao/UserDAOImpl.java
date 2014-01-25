@@ -26,6 +26,9 @@ package com.projects.discussion.dao;
 
 import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.User;
+import com.projects.discussion.entity.UserRoles;
+import java.io.Serializable;
+import java.util.Date;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -33,5 +36,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class UserDAOImpl extends AbstractHbnDao<User> implements UserDAO {
-    
+
+    public User getUserByUsername(String username) {
+        return (User) getSession()
+            .createQuery("from User where login = :username")
+            .setParameter("username", username)
+            .uniqueResult();
+    }
 }

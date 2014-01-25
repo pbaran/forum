@@ -22,24 +22,13 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.service;
+package com.projects.discussion.dao;
 
-import com.projects.discussion.entity.Category;
-import com.projects.discussion.entity.Post;
-import com.projects.discussion.entity.Topic;
-import com.projects.discussion.entity.User;
-import java.util.Date;
-import java.util.List;
+import com.projects.discussion.entity.UserRoles;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface ForumService {
-    public List<Topic> getTopicsByCategory(Long categoryId);
-    public Topic getTopic(Long topicId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public List<Post> getPostsByTopicId(Long topicId);
-    public Category getCategoryById(Long categoryId);
-    public Post createPost(String titleSeoThread, String username, String content);
-    public void updateTopic(Long topicId, Date lastPost, User lastPoster);
+public interface UserRolesDAO extends Dao<UserRoles> {
+    UserRoles getUserRole();
 }

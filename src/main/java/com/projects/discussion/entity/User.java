@@ -39,6 +39,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -79,13 +81,14 @@ public class User {
     
     @Column(name="active", nullable = false)
     private int active;
-    
-    @Column(name="type", nullable = false)
-    private int type;
-    
+   
     @Column(name="joined", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date joined;
+    
+    @JoinColumn(name="type")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private UserRoles type;
     
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
 //    private List<Topic> userList;
@@ -139,19 +142,19 @@ public class User {
         this.active = active;
     }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public Date getJoined() {
         return joined;
     }
 
     public void setJoined(Date joined) {
         this.joined = joined;
+    }
+
+    public UserRoles getType() {
+        return type;
+    }
+
+    public void setType(UserRoles type) {
+        this.type = type;
     }
 }

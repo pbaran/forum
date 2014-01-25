@@ -27,10 +27,13 @@ package com.projects.discussion.service;
 import com.projects.discussion.dao.CategoryDAO;
 import com.projects.discussion.dao.PostDAO;
 import com.projects.discussion.dao.TopicDAO;
+import com.projects.discussion.dao.UserDAO;
 import com.projects.discussion.entity.Category;
 import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
+import com.projects.discussion.entity.User;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +50,8 @@ public class ForumServiceImpl implements ForumService {
     private TopicDAO topicDao;
     @Autowired
     private PostDAO postDao;
+    @Autowired
+    private UserDAO userDao;
     @Autowired
     private CategoryDAO categoryDao;
 
@@ -68,6 +73,24 @@ public class ForumServiceImpl implements ForumService {
 
     public Category getCategoryById(Long categoryId) {
         return categoryDao.get(categoryId);
+    }
+
+    @Transactional(readOnly = false)
+    public Post createPost(String titleSeoThread, String username, String content) {
+        Post post = new Post();
+
+        post.setAuthor(userDao.getUserByUsername(username));
+        post.setAuthorName(username);
+        post.setContent(content);
+        post.setTopicId(topicDao.getTopicIdByTitleSeo(titleSeoThread));
+
+        postDao.create(post);
+        return post;
+    }
+
+    @Transactional(readOnly = false)
+    public void updateTopic(Long topicId, Date lastPost, User lastPoster) {
+        topicDao.updateLastPostAndLastPoster(topicId, lastPost, lastPoster);
     }
     
 }

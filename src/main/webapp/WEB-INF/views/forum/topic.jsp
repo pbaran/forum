@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
                                 <li class="active"><a href="${contextPath}/user/profile"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></li>
                                 <li class="active"><a href="${contextPath}/user/settings"><span class="glyphicon glyphicon-briefcase"></span> Settings</a></li>
                                 <li class="active"><a href="${contextPath}/user/messages"><span class="glyphicon glyphicon-envelope"></span> Messages<span class="badge">3</span></a></li>
-                                <li><a href="<c:url value="j_spring_security_logout" />"><span class="glyphicon glyphicon glyphicon-off"></span></a></li>
+                                <li><a href="${contextPath}/j_spring_security_logout"><span class="glyphicon glyphicon glyphicon-off"></span></a></li>
                             </ul>
                         </security:authorize>
                         <security:authorize access="isAnonymous()">
@@ -54,11 +55,24 @@
 
             <c:forEach var="p" items="${postsList}">
                 <p class="text-right text-info"><small><a href="${contextPath}/user/profile/${p.author.login}">${p.author.login}</a>, <fmt:formatDate value="${p.postDate}" pattern="dd/MM/yyyy HH:mm"/></small></p>
-                <div class="well well-sm">
+                <div id="post-${p.id}" class="well well-sm">
                     ${p.content}
                 </div>
             </c:forEach>
-            
+            <security:authorize access="hasAnyRole('USER','ADMIN')">
+                <form:form method="post" modelAttribute="post">                    
+                    <div class="form-group">
+                        <label for="content">Reply</label>
+                        <form:textarea path="content" placeholder="click to write a message" cssClass="form-control" />
+                        <form:errors path="content">
+                            <div class="alert alert-danger"><form:errors path="content" htmlEscape="false" /></div>
+                        </form:errors>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </form:form>
+            </security:authorize>
         </div>
         <hr>
         <footer>

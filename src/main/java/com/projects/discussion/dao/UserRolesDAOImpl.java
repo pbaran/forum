@@ -22,24 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.service;
+package com.projects.discussion.dao;
 
-import com.projects.discussion.entity.Category;
-import com.projects.discussion.entity.Post;
-import com.projects.discussion.entity.Topic;
-import com.projects.discussion.entity.User;
-import java.util.Date;
-import java.util.List;
+import com.projects.discussion.dao.hibernate.AbstractHbnDao;
+import com.projects.discussion.entity.UserRoles;
+import java.io.Serializable;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface ForumService {
-    public List<Topic> getTopicsByCategory(Long categoryId);
-    public Topic getTopic(Long topicId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public List<Post> getPostsByTopicId(Long topicId);
-    public Category getCategoryById(Long categoryId);
-    public Post createPost(String titleSeoThread, String username, String content);
-    public void updateTopic(Long topicId, Date lastPost, User lastPoster);
+@Repository
+public class UserRolesDAOImpl extends AbstractHbnDao<UserRoles> implements UserRolesDAO {
+
+    public UserRoles getUserRole() {
+        Long userRoleId = 1L;
+        return get((Serializable) userRoleId);
+    }    
 }

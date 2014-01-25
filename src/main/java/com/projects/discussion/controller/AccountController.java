@@ -57,15 +57,15 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
             
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.setAllowedFields(new String[] {
-            "login", "password", "email", "acceptTerms"
-        });
-        
-        // converts empty string to null which is nice most validation rules fire only
-        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder) {
+//        binder.setAllowedFields(new String[] {
+//            "login", "password", "email", "acceptTerms"
+//        });
+//        
+//        // converts empty string to null which is nice most validation rules fire only
+//        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+//    }
     
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String getRegistrationForm(Model model) {
@@ -115,7 +115,6 @@ public class AccountController {
         user.setLogin(form.getLogin());
         user.setEmail(form.getEmail());
         user.setPassword(form.getPassword());
-        user.setActive(0);
         
         return user;
     }

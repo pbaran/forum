@@ -26,6 +26,8 @@ package com.projects.discussion.dao;
 
 import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Topic;
+import com.projects.discussion.entity.User;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
@@ -54,4 +56,13 @@ public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
             .setParameter("id", topicId)
             .uniqueResult();
     }
+
+    public void updateLastPostAndLastPoster(Long topicId, Date lastPost, User lastPoster) {
+        Topic topicToUpdate = get(topicId);
+        topicToUpdate.setLastPost(lastPost);
+        topicToUpdate.setLastPoster(lastPoster);
+        topicToUpdate.setPosts(topicToUpdate.getPosts()+1);
+        update(topicToUpdate);
+    }
+
 }
