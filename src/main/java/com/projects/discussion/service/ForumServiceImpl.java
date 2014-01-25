@@ -92,5 +92,10 @@ public class ForumServiceImpl implements ForumService {
     public void updateTopic(Long topicId, Date lastPost, User lastPoster) {
         topicDao.updateLastPostAndLastPoster(topicId, lastPost, lastPoster);
     }
+
+    @Transactional(readOnly = false)
+    public void updateLastActiveTopicInCategory(Topic lastActiveTopic) {
+        categoryDao.updateLastActiveTopic(lastActiveTopic);
+    }
     
 }

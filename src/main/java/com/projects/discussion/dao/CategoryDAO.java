@@ -25,10 +25,12 @@
 package com.projects.discussion.dao;
 
 import com.projects.discussion.entity.Category;
+import com.projects.discussion.entity.Topic;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 public interface CategoryDAO extends Dao<Category> {
     public Category get(Long id);
+    public void updateLastActiveTopic(Topic lastActiveTopic);
 }

@@ -42,4 +42,5 @@ public interface ForumService {
     public Category getCategoryById(Long categoryId);
     public Post createPost(String titleSeoThread, String username, String content);
     public void updateTopic(Long topicId, Date lastPost, User lastPoster);
+    public void updateLastActiveTopicInCategory(Topic lastActiveTopic);
 }

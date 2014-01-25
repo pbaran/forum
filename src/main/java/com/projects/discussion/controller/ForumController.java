@@ -98,10 +98,11 @@ public class ForumController {
             Model model) {
 
         Long topicId = forumService.getTopicIdByTitleSeo(titleSeoThread);
+        Topic topic = forumService.getTopic(topicId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Post post;
 
-        model.addAttribute("topic", forumService.getTopic(topicId));
+        model.addAttribute("topic", topic);
         model.addAttribute("postsList", forumService.getPostsByTopicId(topicId));
         model.addAttribute("post", new PostForm());
 
@@ -109,7 +110,8 @@ public class ForumController {
             return TOPIC_VIEW;
         }
 
-
+        //@TODO create post and update data to a transcation!
+        
         // create new post for thread
         post = forumService.createPost(titleSeoThread, auth.getName(), form.getContent());
 
@@ -117,7 +119,7 @@ public class ForumController {
         forumService.updateTopic(topicId, new Date(), post.getAuthor());
         
         //update lastActiveTopic field in category entity
-        
+        forumService.updateLastActiveTopicInCategory(topic);
         
         return "redirect:/topic/" + titleSeoThread + "#post-" + post.getId();
     }

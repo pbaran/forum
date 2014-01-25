@@ -26,6 +26,7 @@ package com.projects.discussion.dao;
 
 import com.projects.discussion.dao.hibernate.AbstractHbnDao;
 import com.projects.discussion.entity.Category;
+import com.projects.discussion.entity.Topic;
 import java.io.Serializable;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,12 @@ public class CategoryDAOImpl extends AbstractHbnDao<Category> implements Categor
 
     public Category get(Long id) {
         return get((Serializable)id);
+    }
+
+    public void updateLastActiveTopic(Topic lastActiveTopic) {
+        Category categoryToUpdate = get(lastActiveTopic.getCategory().getId());
+        categoryToUpdate.setPosts(categoryToUpdate.getPosts()+1);
+        update(categoryToUpdate);
     }
 
 }
