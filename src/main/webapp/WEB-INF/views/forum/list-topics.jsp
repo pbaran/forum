@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -87,6 +88,28 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <security:authorize access="hasAnyRole('USER','ADMIN')">
+                <h3>Create new thread</h3>
+                <form:form method="post" modelAttribute="threadForm">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <form:input path="title" cssClass="form-control" />
+                        <form:errors path="title">
+                            <div class="alert alert-danger"><form:errors path="title" htmlEscape="false" /></div>
+                        </form:errors>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Content</label>
+                        <form:textarea path="description" placeholder="click to write a message" cssClass="form-control" />
+                        <form:errors path="description">
+                            <div class="alert alert-danger"><form:errors path="description" htmlEscape="false" /></div>
+                        </form:errors>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+                </form:form>
+            </security:authorize>
         </div>
         <hr>
         <footer>

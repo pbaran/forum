@@ -29,7 +29,6 @@ import com.projects.discussion.entity.Topic;
 import com.projects.discussion.entity.User;
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -40,7 +39,7 @@ public class TopicDAOImpl extends AbstractHbnDao<Topic> implements TopicDAO {
 
     public List<Topic> getTopicsByCategoryId(Long categoryId) {
         return getSession()
-            .createQuery("from Topic t where t.category.id = :categoryId")
+            .createQuery("from Topic t where t.category.id = :categoryId order by t.lastPost desc")
             .setParameter("categoryId", categoryId)
             .list();
     }

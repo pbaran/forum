@@ -24,10 +24,12 @@
 
 package com.projects.discussion.controller;
 
+import com.projects.discussion.entity.Category;
 import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
 import com.projects.discussion.form.AccountForm;
 import com.projects.discussion.form.PostForm;
+import com.projects.discussion.form.ThreadForm;
 import com.projects.discussion.service.ForumService;
 import java.util.Date;
 import java.util.List;
@@ -63,6 +65,8 @@ public class ForumController {
     @RequestMapping(value = "category/{categoryId}", method = RequestMethod.GET)
     public String showListTopics(@PathVariable Long categoryId, Model model) {
         List<Topic> topicList = forumService.getTopicsByCategory(categoryId);
+
+        model.addAttribute("threadForm", new ThreadForm());
         
         if (topicList.isEmpty()) {
             model.addAttribute("category", forumService.getCategoryById(categoryId));
@@ -78,6 +82,21 @@ public class ForumController {
 
             return TOPICS_VIEW;
         }
+    }
+    
+    @RequestMapping(value = "category/{categoryId}", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public String createNewThread(
+            @ModelAttribute("threadForm") @Valid ThreadForm form,
+            @PathVariable Long categoryId,
+            BindingResult result) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        
+        //create new thread
+        forumService.createThread(categoryId, auth.getName(), form);
+        
+        return "redirect:/category/" + categoryId;
     }
     
     @RequestMapping(value = "/topic/{name}", method = RequestMethod.GET)
@@ -96,24 +115,18 @@ public class ForumController {
     public String sendPost(
             @ModelAttribute("post") @Valid PostForm form,
             @PathVariable("name") String titleSeoThread,
-            BindingResult result,
-            Model model) {
+            BindingResult result) {
 
         Long topicId = forumService.getTopicIdByTitleSeo(titleSeoThread);
         Topic topic = forumService.getTopic(topicId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Post post;
 
-        model.addAttribute("topic", topic);
-        model.addAttribute("postsList", forumService.getPostsByTopicId(topicId));
-        model.addAttribute("post", new PostForm());
-
-        if (result.hasErrors()) {
-            return TOPIC_VIEW;
+        if (result.hasErrors()) { //@TODO redirection can not be! lack of error handling
+            return "redirect:/topic/" + titleSeoThread;
         }
 
         //@TODO create post and update data to a transcation!
-        
         // create new post for thread
         post = forumService.createPost(titleSeoThread, auth.getName(), form.getContent());
 

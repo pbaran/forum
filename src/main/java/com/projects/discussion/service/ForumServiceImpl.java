@@ -32,6 +32,8 @@ import com.projects.discussion.entity.Category;
 import com.projects.discussion.entity.Post;
 import com.projects.discussion.entity.Topic;
 import com.projects.discussion.entity.User;
+import com.projects.discussion.form.ThreadForm;
+import com.projects.discussion.helper.Slug;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -96,6 +98,32 @@ public class ForumServiceImpl implements ForumService {
     @Transactional(readOnly = false)
     public void updateLastActiveTopicInCategory(Topic lastActiveTopic) {
         categoryDao.updateLastActiveTopic(lastActiveTopic);
+    }
+
+    @Transactional(readOnly = false)
+    public void createThread(Long categoryId, String username, ThreadForm form) {
+        Topic topic = new Topic();
+        User poster = userDao.getUserByUsername(username);
+        Category category = categoryDao.get(categoryId);
+        
+        topic.setAuthor(poster);
+        topic.setCategory(category);
+        topic.setDescription(form.getDescription());
+        topic.setLastPoster(poster);
+        topic.setPosts(0L);
+        topic.setLastPost(new Date());
+        topic.setTitle(form.getTitle());
+        topic.setTitleSeo(Slug.parse(form.getTitle()));
+
+        // create new thread
+        topicDao.create(topic);
+        
+        // update number of topics and last active topic in category
+        category.setTopics(category.getTopics() + 1);
+        category.setLastActiveTopic(topic);
+        
+        //update number of topics and last poster in category
+        categoryDao.update(category);
     }
     
 }

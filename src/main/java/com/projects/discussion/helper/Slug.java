@@ -22,27 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.service;
+package com.projects.discussion.helper;
 
-import com.projects.discussion.entity.Category;
-import com.projects.discussion.entity.Post;
-import com.projects.discussion.entity.Topic;
-import com.projects.discussion.entity.User;
-import com.projects.discussion.form.ThreadForm;
-import java.util.Date;
-import java.util.List;
+import java.text.Normalizer;
 
-/**
- * @author Piotr Baran <admin@piotrus.net.pl>
- */
-public interface ForumService {
-    public List<Topic> getTopicsByCategory(Long categoryId);
-    public Topic getTopic(Long topicId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public List<Post> getPostsByTopicId(Long topicId);
-    public Category getCategoryById(Long categoryId);
-    public Post createPost(String titleSeoThread, String username, String content);
-    public void updateTopic(Long topicId, Date lastPost, User lastPoster);
-    public void updateLastActiveTopicInCategory(Topic lastActiveTopic);
-    public void createThread(Long categoryId, String username, ThreadForm form);
+public class Slug {
+    public static String parse(String input) {
+        if (input == null || input.length() == 0) {
+            return "";
+        }
+        String out = normalize(input);
+        out = removeDuplicateWhiteSpaces(out);
+        out = out.toLowerCase().replace(" ", "_");
+ 
+        return out;
+    }
+ 
+    private static String normalize(String input) {
+        String result = Normalizer.normalize(input, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        result = result.replaceAll("[^a-zA-Z0-9\\s]", " ");
+ 
+        return result;
+    }
+ 
+    private static String removeDuplicateWhiteSpaces(String input) {
+        return input.replaceAll("\\s+", " ");
+    }
 }

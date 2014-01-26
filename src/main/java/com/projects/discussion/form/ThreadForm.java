@@ -22,27 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.service;
+package com.projects.discussion.form;
 
-import com.projects.discussion.entity.Category;
-import com.projects.discussion.entity.Post;
-import com.projects.discussion.entity.Topic;
-import com.projects.discussion.entity.User;
-import com.projects.discussion.form.ThreadForm;
-import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface ForumService {
-    public List<Topic> getTopicsByCategory(Long categoryId);
-    public Topic getTopic(Long topicId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public List<Post> getPostsByTopicId(Long topicId);
-    public Category getCategoryById(Long categoryId);
-    public Post createPost(String titleSeoThread, String username, String content);
-    public void updateTopic(Long topicId, Date lastPost, User lastPoster);
-    public void updateLastActiveTopicInCategory(Topic lastActiveTopic);
-    public void createThread(Long categoryId, String username, ThreadForm form);
+public class ThreadForm {
+
+    @NotNull
+    @Size(min = 1, max = 250)
+    private String title;
+
+    @NotNull
+    @Size(min = 1, max = 5000)
+    private String description;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
 }
