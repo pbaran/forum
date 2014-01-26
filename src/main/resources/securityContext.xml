@@ -35,5 +35,6 @@
             </user-service>-->
         </authentication-provider>
     </authentication-manager>
-
+    <!-- support for method security annotations -->
+    <global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 </beans:beans>
