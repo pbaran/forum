@@ -28,6 +28,9 @@ import com.projects.discussion.dao.UserDAO;
 import com.projects.discussion.dao.UserRolesDAO;
 import com.projects.discussion.entity.User;
 import com.projects.discussion.entity.UserRoles;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
@@ -52,9 +55,9 @@ public class AccountServiceImpl implements AccountService {
     
     @Transactional(readOnly = false)
     public boolean registerAccount(User user, String password, Errors errors) {
-        String salt = "tyD";
+        String hash = generateMD5Hash(password);
         
-        user.setPassword(salt + password);//generate sha2 hash
+        user.setPassword(hash);
         user.setJoined(new Date());
         user.setActive(INACTIVE_USER);
         user.setType(getUserRole());
@@ -74,4 +77,18 @@ public class AccountServiceImpl implements AccountService {
         return userRolesDao.getUserRole();
     }
     
+    private String generateMD5Hash(String password) {
+        String hash = null;
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(password.getBytes(), 0, password.length());
+            hash = new BigInteger(1, md5.digest()).toString(16);
+            if (hash.length() < 32) {
+                hash = "0" + hash;
+            }
+        } catch (NoSuchAlgorithmException nsax) {
+            // ignore
+        }
+        return hash;
+    }
 }

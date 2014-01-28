@@ -114,16 +114,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        String hash = null;
-        try {
-            MessageDigest sha2 = MessageDigest.getInstance("SHA-256");
-            sha2.update(password.getBytes());
-            BigInteger code = new BigInteger(1, sha2.digest());
-            hash = code.toString(16);
-        } catch (NoSuchAlgorithmException nsax) {
-            // ignore
-        }
-        this.password = hash;
+        this.password = password;
     }
 
     public String getEmail() {
