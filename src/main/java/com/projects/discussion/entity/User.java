@@ -85,7 +85,7 @@ public class User {
     @Column(name="joined", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date joined;
-    
+
     @JoinColumn(name="type")
     @ManyToOne(fetch = FetchType.EAGER)
     private UserRoles type;

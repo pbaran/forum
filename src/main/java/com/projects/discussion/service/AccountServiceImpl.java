@@ -25,8 +25,10 @@
 package com.projects.discussion.service;
 
 import com.projects.discussion.dao.UserDAO;
+import com.projects.discussion.dao.UserDetailsDAO;
 import com.projects.discussion.dao.UserRolesDAO;
 import com.projects.discussion.entity.User;
+import com.projects.discussion.entity.UserDetails;
 import com.projects.discussion.entity.UserRoles;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -52,6 +54,8 @@ public class AccountServiceImpl implements AccountService {
     private UserDAO userDao;
     @Autowired
     private UserRolesDAO userRolesDao;
+    @Autowired
+    private UserDetailsDAO userDetailsDao;
     
     @Transactional(readOnly = false)
     public boolean registerAccount(User user, String password, Errors errors) {
@@ -65,6 +69,10 @@ public class AccountServiceImpl implements AccountService {
         //@TODO validate data
 
         userDao.create(user);
+        
+        UserDetails userDetails = new UserDetails();
+        userDetails.setUser(user);
+        userDetailsDao.create(userDetails);
         
         return true;
     }

@@ -46,52 +46,43 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-@NamedQuery(
-        name = "findUserByLogin",
-        query = "from User where login = :login")
 @Entity
-@Table(name="user")
-public class User {
+@Table(name="user_details")
+public class UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id", nullable = false)
     private Long id;
 
-    @NotNull
-    @Size(min = 3, max = 100)
-    @Column(name="login", nullable = false)
-    private String login;
+    @Size(min = 2, max = 200)
+    @Column(name="name", nullable = true)
+    private String name;
     
-    @NotNull
-    @Size(min = 3, max = 100)
-    @Column(name="password", nullable = false)
-    private String password;
+    @Size(min = 2, max = 200)
+    @Column(name="surname", nullable = true)
+    private String surname;
     
-    @NotNull
-    @Size(min = 6, max = 512)
-    @Column(name="email", nullable = false)
-    private String email;
+    @Size(min = 3, max = 500)
+    @Column(name="address", nullable = true)
+    private String address;
     
-    @Column(name="active", nullable = false)
-    private int active;
-   
-    @Column(name="joined", insertable = false, updatable = false)
+    @Size(min = 2, max = 500)
+    @Column(name="city", nullable = true)
+    private String city;
+
+    @Column(name="birthday", insertable = true)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date joined;
-    
-    @JoinColumn(name="type")
+    private Date birthday;
+
+    @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne(fetch = FetchType.EAGER)
-    private UserRoles type;
-    
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "topic")
-//    private List<Topic> userList;
+    private User user;
 
     public Long getId() {
         return id;
@@ -101,51 +92,52 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public int getActive() {
-        return active;
+    public String getCity() {
+        return city;
     }
 
-    public void setActive(int active) {
-        this.active = active;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Date getJoined() {
-        return joined;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setJoined(Date joined) {
-        this.joined = joined;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
-    public UserRoles getType() {
-        return type;
+    public User getUser() {
+        return user;
     }
 
-    public void setType(UserRoles type) {
-        this.type = type;
+    public void setUser(User user) {
+        this.user = user;
     }
+
 }
