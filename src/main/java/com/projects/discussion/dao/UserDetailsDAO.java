@@ -24,11 +24,12 @@
 
 package com.projects.discussion.dao;
 
+import com.projects.discussion.entity.User;
 import com.projects.discussion.entity.UserDetails;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
 public interface UserDetailsDAO extends Dao<UserDetails>{
-
+    UserDetails getByUser(User user);
 }

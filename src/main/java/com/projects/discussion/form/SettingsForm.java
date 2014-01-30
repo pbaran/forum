@@ -22,67 +22,37 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.entity;
+package com.projects.discussion.form;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-@Entity
-@Table(name="user_details")
-public class UserDetails {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", nullable = false)
+public class SettingsForm {
+    @NotNull
     private Long id;
+    
+    @Size(max = 200)
+    @Pattern(regexp="^[a-zA-Z]+$", message="Only letter.")
+    private String name;
 
     @Size(max = 200)
-    @Column(name="name", nullable = true)
-    private String name;
-    
-    @Size(max = 200)
-    @Column(name="surname", nullable = true)
+    @Pattern(regexp="^[a-zA-Z]+$", message="Only letter.")
     private String surname;
-    
+
     @Size(max = 500)
-    @Column(name="address", nullable = true)
     private String address;
-    
+
     @Size(max = 500)
-    @Column(name="city", nullable = true)
     private String city;
 
-    @Column(name="birthday", insertable = true)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
-
-    @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
 
     public Long getId() {
         return id;
@@ -130,14 +100,6 @@ public class UserDetails {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
 }

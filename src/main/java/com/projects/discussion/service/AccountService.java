@@ -25,6 +25,7 @@
 package com.projects.discussion.service;
 
 import com.projects.discussion.entity.User;
+import com.projects.discussion.entity.UserDetails;
 import com.projects.discussion.entity.UserRoles;
 import java.util.List;
 import org.springframework.validation.Errors;
@@ -36,4 +37,6 @@ public interface AccountService {
     boolean registerAccount(User user, String password, Errors errors);
     List<User> getUsers();
     UserRoles getUserRole();
+    boolean updateUserDetails(UserDetails userDetails, String login);
+    UserDetails getUserDetailsByUsername(String login);
 }

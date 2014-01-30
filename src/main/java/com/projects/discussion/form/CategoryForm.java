@@ -22,30 +22,60 @@
  * THE SOFTWARE.
  */
 
-package com.projects.discussion.service;
+package com.projects.discussion.form;
 
-import com.projects.discussion.entity.Category;
-import com.projects.discussion.entity.Post;
-import com.projects.discussion.entity.Topic;
-import com.projects.discussion.entity.User;
-import com.projects.discussion.form.ThreadForm;
-import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Piotr Baran <admin@piotrus.net.pl>
  */
-public interface ForumService {
-    public List<Topic> getTopicsByCategory(Long categoryId);
-    public Topic getTopic(Long topicId);
-    public Long getTopicIdByTitleSeo(String titleSeo);
-    public List<Post> getPostsByTopicId(Long topicId);
-    public Category getCategoryById(Long categoryId);
-    public Post createPost(String titleSeoThread, String username, String content);
-    public void updateTopic(Long topicId, Date lastPost, User lastPoster);
-    public void updateLastActiveTopicInCategory(Topic lastActiveTopic);
-    public void createThread(Long categoryId, String username, ThreadForm form);
-    public void addCategory(Category category);
-    public void removeCategory(Long id);
-    public void updateCategory(Category category);
+public class CategoryForm {
+
+    private Long id;
+
+    @NotNull
+    @Size(min = 1, max = 128)
+    private String name;
+
+    @NotNull
+    @Size(min = 1, max = 255)
+    private String nameSeo;
+
+    @NotNull
+    @Size(min = 1, max = 1000)
+    private String description;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNameSeo() {
+        return nameSeo;
+    }
+
+    public void setNameSeo(String nameSeo) {
+        this.nameSeo = nameSeo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
 }

@@ -125,5 +125,19 @@ public class ForumServiceImpl implements ForumService {
         //update number of topics and last poster in category
         categoryDao.update(category);
     }
-    
+
+    @Transactional(readOnly = false)
+    public void addCategory(Category category) {
+        categoryDao.create(category);
+    }    
+
+    @Transactional(readOnly = false)
+    public void removeCategory(Long id) {
+        categoryDao.deleteById(id);
+    }
+
+    @Transactional(readOnly = false)
+    public void updateCategory(Category category) {
+        categoryDao.update(category);
+    }
 }

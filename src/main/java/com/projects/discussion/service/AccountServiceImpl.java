@@ -77,6 +77,16 @@ public class AccountServiceImpl implements AccountService {
         return true;
     }
 
+    @Transactional(readOnly = false)
+    public boolean updateUserDetails(UserDetails userDetails, String login) {
+        User user = userDao.getUserByUsername(login);
+        userDetails.setUser(user);
+        
+        userDetailsDao.update(userDetails);
+        
+        return true;
+    }
+
     public List<User> getUsers() {
         return userDao.getAll();
     }
@@ -98,5 +108,10 @@ public class AccountServiceImpl implements AccountService {
             // ignore
         }
         return hash;
+    }
+
+    public UserDetails getUserDetailsByUsername(String login) {
+        User user = userDao.getUserByUsername(login);
+        return userDetailsDao.getByUser(user);
     }
 }

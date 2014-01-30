@@ -8,7 +8,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${category.name}</title>
+        <title>Settings</title>
         <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.css" />" />
         <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />" />
     </head>
@@ -26,13 +26,8 @@
                                 <li class="active"><a href="${contextPath}/user/profile"><span class="glyphicon glyphicon-info-sign"></span> Profile</a></li>
                                 <li class="active"><a href="${contextPath}/user/settings"><span class="glyphicon glyphicon-briefcase"></span> Settings</a></li>
                                 <li class="active"><a href="${contextPath}/user/messages"><span class="glyphicon glyphicon-envelope"></span> Messages<span class="badge">3</span></a></li>
-                                <li><a href="<c:url value="j_spring_security_logout" />"><span class="glyphicon glyphicon glyphicon-off"></span></a></li>
+                                <li><a href="${contextPath}/j_spring_security_logout"><span class="glyphicon glyphicon glyphicon-off"></span></a></li>
                             </ul>
-                        </security:authorize>
-                        <security:authorize access="isAnonymous()">
-                            <a href="${contextPath}/signup" class="btn btn-default">Sign up</a>
-                            <a href="${contextPath}/login" class="btn btn-default">Log in</a>
-                            <a href="${contextPath}/about-project" class="btn btn-default">About project</a>
                         </security:authorize>
                     </div>
                 </div>
@@ -42,34 +37,12 @@
         <div class="container">
             <ol class="breadcrumb">
                 <li><small><a href="${contextPath}">Home</a></small></li>
-                <li class="active"><small>${category.name} category</small></li>
+                <li><small><a href="${contextPath}/user/profile/${user.login}">Profile</a></small></li>
+                <li class="active"><small>Settings</small></li>
             </ol>
         </div>
         <div class="container">
-            <h2>Forum: <span>${category.name}</span></h2>
-            <p><small>${category.description}</small></p>
-            <security:authorize access="hasAnyRole('USER','ADMIN')">
-                <h3>Create new thread</h3>
-                <form:form method="post" modelAttribute="threadForm">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <form:input path="title" cssClass="form-control" />
-                        <form:errors path="title">
-                            <div class="alert alert-danger"><form:errors path="title" htmlEscape="false" /></div>
-                        </form:errors>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Content</label>
-                        <form:textarea path="description" placeholder="click to write a message" cssClass="form-control" />
-                        <form:errors path="description">
-                            <div class="alert alert-danger"><form:errors path="description" htmlEscape="false" /></div>
-                        </form:errors>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
-                </form:form>
-            </security:authorize>
+            <h1>Your details have been updated.</h1>
         </div>
         <hr>
         <footer>
